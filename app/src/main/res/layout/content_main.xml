@@ -10,23 +10,6 @@
     tools:context=".MainActivity">
 
     <Button
-        android:text="Live Check KTP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/liveCheck"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
-        android:layout_marginStart="8dp"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-
-        />
-
-    <Button
         android:text="Take KTP Photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,8 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="8dp"
         app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintTop_toBottomOf="@+id/liveCheck"
-
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <Button
@@ -46,9 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonDetect"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-
+        android:layout_marginBottom="12dp"
+       app:layout_constraintBottom_toTopOf="@id/sv"
         app:layout_constraintTop_toBottomOf="@+id/buttonAdd"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,17 +37,24 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    <TextView
-        android:text="Output"
+    <ScrollView
+        android:id="@+id/sv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textoutput"
-        android:layout_marginTop="8dp"
+        android:layout_height="500dp"
         app:layout_constraintTop_toBottomOf="@+id/buttonDetect"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <TextView
+            android:text="Output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textoutput"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+           />
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

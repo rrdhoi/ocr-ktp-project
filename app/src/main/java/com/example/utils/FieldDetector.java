@@ -2,7 +2,7 @@ package com.example.utils;
 
 import android.graphics.Rect;
 
-public class FieldChecks {
+public class FieldDetector {
 
     public static boolean checkNikField(String dataText) {
         String text = dataText.toLowerCase().trim();
@@ -16,11 +16,10 @@ public class FieldChecks {
 
     public static boolean checkTglLahirField(String dataText) {
         String text = dataText.toLowerCase().trim();
-        return text.equals("lahir") ||
-                text.equals("tempat") ||
+        return text.contains("lahir") ||
                 text.equals("tempatigllahir") ||
                 text.equals("empatgllahir") ||
-                text.equals("tempat/tgl");
+                text.equals("tempat/tgl") || text.contains("tempat");
     }
 
     public static boolean checkJenisKelaminField(String dataText) {
@@ -40,39 +39,17 @@ public class FieldChecks {
 
     public static boolean checkRtRwField(String dataText) {
         String text = dataText.toLowerCase().trim();
-        return text.equals("rt/rw") || text.equals("rw ") || text.equals("rt") || text.equals("rtirw");
+        return text.equals("rt/rw") || text.equals("rw") || text.equals("rtirw") || text.equals("rtrw") || text.contains("ri/rw") || text.equals("rtaw") || text.equals("rtrwe") || text.equals("rirwe") || text.equals("rt/ria");
     }
 
     public static boolean checkKelDesaField(String dataText) {
         String text = dataText.toLowerCase().trim();
-        return text.equals("kel/desa") || text.equals("helldesa") || text.equals("kelldesa");
+        return text.equals("kel/desa") || text.equals("helldesa") || text.equals("kelldesa") || text.equals("keldesa") || text.equals("ke/desa") || text.equals("desa") ||  text.equals("kedesa");
     }
 
     public static boolean checkKecamatanField(String dataText) {
         String text = dataText.toLowerCase().trim();
         return text.equals("kecamatan") || dataText.contains("kecamatan");
-    }
-
-    public static boolean checkAgamaField(String dataText) {
-        String text = dataText.toLowerCase().trim();
-        return text.equals("agama") || text.equals("gama");
-    }
-
-    public static boolean checkKawinField(String dataText) {
-        String text = dataText.toLowerCase().trim();
-        return text.equals("kawin") || text.equals("perkawinan") || text.equals("perkawinan:");
-    }
-
-    public static boolean checkPekerjaanField(String dataText) {
-        String text = dataText.toLowerCase().trim();
-        return text.equals("kerja") || text.equals("pekerjaan");
-    }
-
-    public static boolean checkKewarganegaraanField(String dataText) {
-        String text = dataText.toLowerCase().trim();
-        return text.equals("kewarganegaraan") ||
-                text.equals("negaraan") ||
-                text.equals("kewarganegaraan:");
     }
 
     public static boolean isInside(Rect rect, Rect isInside) {

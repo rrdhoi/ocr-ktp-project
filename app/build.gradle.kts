@@ -40,9 +40,13 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("com.google.firebase:firebase-ml-vision:19.0.2")
-    //    implementation("com.google.firebase:firebase-ml-vision:24.0.3")
-    implementation("com.github.marchinram:RxGallery:0.6.5")
+//    implementation("com.google.firebase:firebase-ml-vision:19.0.2")
+    implementation("com.google.firebase:firebase-ml-vision:24.0.3")
+
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
+
+    implementation("com.github.marchinram:RxGallery:0.6.6")
+    implementation("com.github.dhaval2404:imagepicker:2.1")
     implementation("org.michaelbel:bottomsheet:1.2.3")
     implementation("io.reactivex.rxjava2:rxjava:2.2.6")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")

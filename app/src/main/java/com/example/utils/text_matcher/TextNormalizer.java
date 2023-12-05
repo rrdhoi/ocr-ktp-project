@@ -1,10 +1,13 @@
 package com.example.utils.text_matcher;
 
+import java.util.Objects;
+
 public class TextNormalizer {
 
     public static String normalizeNikText(String text) {
         String result = text.toUpperCase();
-        result = result.replaceAll("NIK", "").replaceAll(":", "").trim();
+        result = result.replaceAll("NIK", "").replaceAll(":", "")
+                .trim();
         return result;
     }
 
@@ -12,59 +15,15 @@ public class TextNormalizer {
         String result = text.toUpperCase();
         result = result.replaceAll("NEMA", "")
                 .replaceAll("NAME", "")
+                .replaceAll("NIK", "")
+                .replaceAll("-", "")
                 .replaceAll(":", "")
-                .trim();
-        return result;
-    }
-
-    public static String normalizeJenisKelaminText(String text) {
-        String result = text.toUpperCase();
-        result = result.replaceAll("GOL. DARAHO", "")
-                .replaceAll("GOL. DARAH", "")
-                .replaceAll("GOL DARAH", "")
-                .replaceAll("LAKFEARI", "")
-                .replaceAll("LAKFLAK", "")
-                .replaceAll("KELAMIN", "")
-                .replaceAll("KEIAMIN", "")
-                .replaceAll("JENIS", "")
-                .replaceAll("DENIS", "")
-                .replaceAll("DARAH ", "")
-                .replaceAll("ENIS", "")
-                .replaceAll("DARA", "")
-                .replaceAll("GO", "")
-                .replaceAll("L. ", "")
-                .replaceAll(" H0", "")
-                .replaceAll(" HO", "")
-                .replaceAll(":", "")
-                .replaceAll(" 0", "")
-                .replaceAll(" O", "")
+                .replaceAll("1", "I")
                 .trim();
 
-        if (result.equals("LAK-LAK") ||
-                result.equals("LAKI-LAK") ||
-                result.equals("AK-LAK") ||
-                result.equals("LAKFLAKI") ||
-                result.equals("LAKHLAK") ||
-                result.equals("LAKFEAKI") ||
-                result.equals("LAKELAKI") ||
-                result.equals("LAKELAK") ||
-                result.equals("LAKHLAKI") ||
-                result.equals("LAKHEAK") ||
-                result.equals("LAK-LAKI") ||
-                result.equals("LAKHEAKI") ||
-                result.equals("LAKIFEAK") ||
-                result.equals("LAKFEAKE") ||
-                result.equals("LAKIFEAKI") ||
-                result.equals("LAKFEAR") ||
-                result.equals("LAKFLAK") ||
-                result.equals("LAK-LAKE") ||
-                result.equals("LAK-EAK") ||
-                result.equals("LAKFEAK") ||
-                result.equals("LAK-EAKI") ||
-                result.equals("LAKELAKE")) {
-            return "Laki-Laki";
-        }
-        return result;
+        result = fixAsciiCharacters(result);
+
+        return result.isEmpty() ? null : result;
     }
 
     public static String normalizeAlamatText(String text) {
@@ -72,83 +31,103 @@ public class TextNormalizer {
         result = result.replaceAll("RI/KEILDESAA", "")
                 .replaceAll("RTKELIIDESAA", "")
                 .replaceAll("TIKEL/LDESA", "")
-                // ... (Pola penggantian dilanjutkan)
                 .replaceAll(":", "")
                 .replaceAll("=", "")
                 .replaceAll("  ", " ")
                 .trim();
-        System.out.println("result result result result result " + result);
+
+        result = fixAsciiCharacters(result);
         return result;
     }
 
-    public static String normalizeKawinText(String text) {
+    public static String normalizeRtRwText(String text) {
         String result = text.toUpperCase();
-        result = result.replaceAll("PERKAWINAN", "")
-                .replaceAll("PERKAWINA", "")
-                .replaceAll("STATUS", "")
-                .replaceAll("TATUS", "")
-                .replaceAll("STAFUS", "")
-                .replaceAll("R ", "")
-                .replaceAll("T ", "")
+        result = result
+                .replaceAll("RTRWE", "")
+                .replaceAll("-", "")
                 .replaceAll(":", "")
-                .trim();
-        return result;
-    }
-
-    public static String normalizePekerjaanText(String text) {
-        String result = text.toUpperCase();
-        result = result.replaceAll("PEKERJAAN", "").replaceAll(":", "").trim();
-        if (result.equals("PELAJARIMAHASISSWA") ||
-                result.equals("PELAJARIMAHASISWA") ||
-                result.equals("PELAJARIMAHASISVWA") ||
-                result.equals("PELAJARMAHASISWA")) {
-            return "Pelajar/Mahasiswa";
-        }
-        return result;
-    }
-
-    public static String normalizeKewarganegaraanText(String text) {
-        String result = text.toUpperCase();
-        result = result.replaceAll("KEWARGANEGARAAN", "")
-                .replaceAll("EUMUR", "")
-                .replaceAll("HDUP", "")
-                .replaceAll("H ", "")
-                .replaceAll("N ", "")
-                .replaceAll(":", "")
-                .trim();
-        return result;
-    }
-
-    public static String normalizeAgamaText(String text) {
-        String result = text.toUpperCase();
-        result = result.replaceAll("AGAMA", "")
-                .replaceAll(":", "")
-                .replaceAll("GAMA", "")
+                .replaceAll("=", "")
+                .replaceAll(" {2}", "")
+                .replaceAll("O", "0")
+                .replaceAll("O", "0")
                 .trim();
 
-        if (result.equals("SLAM") ||
-                result.equals("AM") ||
-                result.equals("SLA AM") ||
-                result.equals("ISLU AM") ||
-                result.equals("SL LAM") ||
-                result.equals("ISLAME") ||
-                result.equals("SLA M") ||
-                result.equals("ISL AM") ||
-                result.equals("ISLA AM") ||
-                result.equals("S AM") ||
-                result.equals("SLL AM") ||
-                result.equals("SL AM") ||
-                result.equals("SE AM") ||
-                result.equals("1SLAM") ||
-                result.equals("ISLAMM") ||
-                result.equals("SLA") ||
-                result.equals("LAM")) {
-            result = "Islam";
-        }
-        if (result.trim().isEmpty()) {
-            return "";
+        result = addSlashEveryThreeDigits(result);
+        return Objects.equals(result, "") ? null : result;
+    }
+
+    public static String normalizeDesaKelText(String text) {
+        String result = text.toUpperCase();
+        result = result
+                .replaceAll("KELDESA", "")
+                .replaceAll("-", "")
+                .replaceAll(":", "")
+                .replaceAll("=", "")
+                .replaceAll("  ", " ")
+                .trim();
+
+        result = fixAsciiCharacters(result);
+        return result;
+    }
+
+    public static String normalizeKecamatanText(String text) {
+        String result = text.toUpperCase();
+        result = result
+                .replaceAll("KECAMATAN", "")
+                .replaceAll(":", "")
+                .replaceAll("-", "")
+                .replaceAll("=", "")
+                .replaceAll("  ", " ")
+                .trim();
+
+        result = fixAsciiCharacters(result);
+        return result;
+    }
+
+    public static String addSlashEveryThreeDigits(String text) {
+        StringBuilder result = new StringBuilder();
+        int count = 0;
+
+        if (!text.contains("/")) {
+            for (int i = 0; i < text.length(); i++) {
+                char c = text.charAt(i);
+
+                result.append(c);
+
+                if (Character.isDigit(c)) {
+                    count++;
+
+                    if (count == 3 && i < text.length() - 1 && text.charAt(i + 1) != '/') {
+                        result.append("/");
+                        count = 0;
+                    }
+                } else if (c == '/') {
+                    count = 0;
+                }
+            }
         } else {
-            return result;
+            return text;
         }
+
+        if (result.indexOf("/") == 0) {
+            return null;
+        }
+
+        return result.toString();
+    }
+
+    public static String fixAsciiCharacters(String text) {
+
+        return text
+                .replaceAll("Ä", "A")
+                .replaceAll("Ü", "U")
+                .replaceAll("ü", "u")
+                .replaceAll("Ö", "O")
+                .replaceAll("ö", "o")
+                .replaceAll("Ñ", "N")
+                .replaceAll("Ë", "E")
+                .replaceAll("ë", "e")
+                .replaceAll("ÿ", "y")
+                .replaceAll("ï", "i");
     }
 }
