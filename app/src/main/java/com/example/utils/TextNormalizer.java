@@ -1,4 +1,4 @@
-package com.example.utils.text_matcher;
+package com.example.utils;
 
 import java.util.Objects;
 
@@ -6,19 +6,26 @@ public class TextNormalizer {
 
     public static String normalizeNikText(String text) {
         String result = text.toUpperCase();
-        result = result.replaceAll("NIK", "").replaceAll(":", "")
+        result = result
+                .replaceAll("NIK", "")
+                .replaceAll(":", "")
                 .trim();
         return result;
     }
 
     public static String normalizeNamaText(String text) {
         String result = text.toUpperCase();
-        result = result.replaceAll("NEMA", "")
-                .replaceAll("NAME", "")
+
+        for (String element : StringConstant.FIELD_NAMA) {
+            result = result.replaceAll(element.toUpperCase(), "");
+        }
+
+        result = result
                 .replaceAll("NIK", "")
                 .replaceAll("-", "")
                 .replaceAll(":", "")
                 .replaceAll("1", "I")
+                .replaceAll("\\s+", " ")
                 .trim();
 
         result = fixAsciiCharacters(result);
@@ -28,12 +35,17 @@ public class TextNormalizer {
 
     public static String normalizeAlamatText(String text) {
         String result = text.toUpperCase();
+
+        for (String element : StringConstant.FIELD_ALAMAT) {
+            result = result.replaceAll(element.toUpperCase(), "");
+        }
+
         result = result.replaceAll("RI/KEILDESAA", "")
                 .replaceAll("RTKELIIDESAA", "")
                 .replaceAll("TIKEL/LDESA", "")
                 .replaceAll(":", "")
                 .replaceAll("=", "")
-                .replaceAll("  ", " ")
+                .replaceAll("\\s+", " ")
                 .trim();
 
         result = fixAsciiCharacters(result);
@@ -42,13 +54,16 @@ public class TextNormalizer {
 
     public static String normalizeRtRwText(String text) {
         String result = text.toUpperCase();
+
+        for (String element : StringConstant.FIELD_RT_RW) {
+            result = result.replaceAll(element.toUpperCase(), "");
+        }
+
         result = result
-                .replaceAll("RTRWE", "")
                 .replaceAll("-", "")
                 .replaceAll(":", "")
                 .replaceAll("=", "")
-                .replaceAll(" {2}", "")
-                .replaceAll("O", "0")
+                .replaceAll("\\s+", " ")
                 .replaceAll("O", "0")
                 .trim();
 
@@ -58,12 +73,16 @@ public class TextNormalizer {
 
     public static String normalizeDesaKelText(String text) {
         String result = text.toUpperCase();
+
+        for (String element : StringConstant.FIELD_KEL_DESA) {
+            result = result.replaceAll(element.toUpperCase(), "");
+        }
+
         result = result
-                .replaceAll("KELDESA", "")
                 .replaceAll("-", "")
                 .replaceAll(":", "")
                 .replaceAll("=", "")
-                .replaceAll("  ", " ")
+                .replaceAll("\\s+", " ")
                 .trim();
 
         result = fixAsciiCharacters(result);
@@ -72,12 +91,16 @@ public class TextNormalizer {
 
     public static String normalizeKecamatanText(String text) {
         String result = text.toUpperCase();
+
+        for (String element : StringConstant.FIELD_KECAMATAN) {
+            result = result.replaceAll(element.toUpperCase(), "");
+        }
+
         result = result
-                .replaceAll("KECAMATAN", "")
                 .replaceAll(":", "")
                 .replaceAll("-", "")
                 .replaceAll("=", "")
-                .replaceAll("  ", " ")
+                .replaceAll("\\s+", " ")
                 .trim();
 
         result = fixAsciiCharacters(result);

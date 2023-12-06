@@ -21,16 +21,10 @@
         android:theme="@style/Theme.Ocrktpproject"
         tools:targetApi="31">
         <meta-data
-            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-            android:value="ocr" />
-        <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="ocr" />
         <activity
-            android:name=".LivePreviewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
+            android:name="com.example.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
